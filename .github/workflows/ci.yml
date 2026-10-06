@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      # 测试只依赖纯 Python 内核（kernel/ 与 problems_io），无需安装 NiceGUI/pywebview
+      - run: pip install pytest
+      - name: 教材例题锚点（例3-1~3-4、例3-8）
+        run: python tests/test_examples.py
+      - name: 内核回归 + 题目卡格式
+        run: python -m pytest tests/ -q

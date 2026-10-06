@@ -1,0 +1,31 @@
+# ---- 打包产物（可由 build_exe.bat 重新生成；spec 打包配置入库） ----
+dist/
+build/
+
+# ---- Python ----
+__pycache__/
+*.pyc
+
+# ---- 日志 ----
+*.log
+
+# ---- IDE ----
+.idea/
+
+# ---- 题库：运行时数据（会话内自动读写；每次启动重置，不入库） ----
+problems.json
+
+# ---- 内部文档与本地工具配置（不入库） ----
+AGENTS.md
+HANDOFF.md
+docs/CHANGELOG.md
+docs/decisions.md
+.zcodeignore
+
+# ---- 发布导出目录（由项目根目录同步生成） ----
+release/
+
+# ---- 大体积参考资料（仅本地保存，不入库） ----
+教材第三章/
+教材附录/
+规范标准/
