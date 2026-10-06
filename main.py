@@ -2640,9 +2640,19 @@ def build_data_tab():
         _card_table("钢筋公称截面面积 A<sub>s</sub>（附录C 表C-1；多根列＝教材手算查表口径）",
                     ["直径", "单根 (mm²)", "2根", "3根", "6根"], bar_rows, icon="straighten",
                     right=("单根 (mm²)", "2根", "3根", "6根"), key="C1")
-        _card_table("板受力钢筋间距系列（附录C 表C-2）",
-                    ["间距 (mm)"], [{"间距 (mm)": sp} for sp in SLAB_SPACINGS],
-                    icon="format_line_spacing", key="C2")
+        # 表C-2 只有单列 26 个数：套 q-table 会拉满全宽、中间大片空白（1384px 高），
+        # 改为芯片阵列紧凑呈现；nz-tbl-C2 锚点保留（计算过程里的"表C-2"引用仍可跳转）
+        with ui.card().classes(CARD):
+            ui.html('<div id="nz-tbl-C2" style="position:relative;top:-8px"></div>')
+            with ui.row().classes("items-center gap-1"):
+                ui.icon("format_line_spacing").classes("text-primary text-lg")
+                ui.html("板受力钢筋间距系列（附录C 表C-2）", **HTML_KW).classes("font-bold")
+            _sp_chips = "".join(
+                f'<span style="border:1px solid #dce5ec;border-radius:6px;padding:4px 12px;'
+                f'font-size:13.5px;color:#37474f;background:#f8fafc;">{sp}</span>'
+                for sp in SLAB_SPACINGS)
+            ui.html(f'<div style="display:flex;flex-wrap:wrap;gap:8px;">{_sp_chips}</div>',
+                    **HTML_KW)
         _card_table("保护层最小厚度 c 与环境类别（附录D 表D-1、规范表3.1.11）",
                     ["环境", "板 (mm)", "梁 (mm)", "环境条件"], cover_rows, icon="security",
                     right=("板 (mm)", "梁 (mm)"), key="D1")
