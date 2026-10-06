@@ -2708,8 +2708,6 @@ def build_ui():
 ::-webkit-scrollbar{width:9px;height:9px}
 ::-webkit-scrollbar-thumb{background:#b3c2ce;border-radius:5px}
 ::-webkit-scrollbar-thumb:hover{background:#90a4ae}
-/* 长表格滚动时表头吸顶（避开页头 + 题号条/页签的吸顶高度） */
-.q-table thead tr{position:sticky;top:var(--nz-stack,180px);z-index:2;background:#fff}
 /* 数字输入框：隐藏原生上下步进箭头（外观），滚轮误改值由下面的 wheel 守卫根治 */
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
